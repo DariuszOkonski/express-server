@@ -11,7 +11,23 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use('/user', (req, res, next) => {
+  res.show('forbidden.html');
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/', (req, res, next) => {
+  res.show('home.html');
+});
+
+app.get('/home', (req, res) => {
+  res.show('home.html');
+});
+
+app.get('/about', (req, res) => {
+  res.show('about.html');
+});
 
 const PORT = 8000;
 app.listen(PORT, () => {
