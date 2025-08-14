@@ -18,7 +18,7 @@ app.use('/user', (req, res, next) => {
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res, next) => {
-  res.show('home.html');
+  res.redirect('/home');
 });
 
 app.get('/home', (req, res) => {
