@@ -29,6 +29,10 @@ app.get('/about', (req, res) => {
   res.show('about.html');
 });
 
+app.use((req, res) => {
+  res.show('404.html');
+});
+
 const PORT = 8000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}...`);
