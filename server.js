@@ -44,9 +44,13 @@ app.get('/hello/:name', (req, res) => {
 });
 
 app.post('/contact/send-message', (req, res) => {
-  console.log(req.body);
-  res.json(req.body);
-  // res.send('POST METHOD');
+  const { author, sender, title, message } = req.body;
+
+  if (author && sender && title && message) {
+    res.send('The message has been sent!');
+  } else {
+    res.send('You can not leave fields empty!');
+  }
 });
 
 app.use((req, res) => {
