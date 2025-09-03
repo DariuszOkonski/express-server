@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/home', (req, res) => {
-  res.render('home');
+  res.render('home', { layout: 'dark' });
 });
 
 app.get('/about', (req, res) => {
