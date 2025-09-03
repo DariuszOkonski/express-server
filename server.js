@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 const hbs = require('express-handlebars');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
 
 const app = express();
 
@@ -43,13 +45,12 @@ app.get('/hello/:name', (req, res) => {
   res.render('hello', { name: req.params.name });
 });
 
-app.post('/contact/send-message', (req, res) => {
-  console.log(req.body);
-
-  const { author, sender, title, message, design } = req.body;
+app.post('/contact/send-message', upload.single('design'), (req, res) => {
+  const design = req.file;
+  const { author, sender, title, message } = req.body;
 
   if (author && sender && title && message && design) {
-    res.render('contact', { isSent: true });
+    res.render('contact', { isSent: true, fileName: design.originalname });
   } else {
     res.render('contact', { isError: true });
   }
