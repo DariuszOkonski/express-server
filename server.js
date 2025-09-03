@@ -7,30 +7,22 @@ const app = express();
 app.engine('hbs', hbs());
 app.set('view engine', 'hbs');
 
-app.use((req, res, next) => {
-  res.show = (name) => {
-    res.sendFile(path.join(__dirname, `/views/${name}`));
-  };
-
-  next();
-});
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/user', (req, res) => {
-  res.show('forbidden.html');
+  res.render('forbidden', { layout: false });
 });
-
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
   res.redirect('/home');
 });
 
 app.get('/home', (req, res) => {
-  res.show('home.html');
+  res.render('home', { layout: false });
 });
 
 app.get('/about', (req, res) => {
-  res.show('about.html');
+  res.render('about', { layout: false });
 });
 
 app.get('/hello/:name', (req, res) => {
@@ -38,7 +30,7 @@ app.get('/hello/:name', (req, res) => {
 });
 
 app.use((req, res) => {
-  res.show('404.html');
+  res.render('404', { layout: false });
 });
 
 const PORT = 8000;
