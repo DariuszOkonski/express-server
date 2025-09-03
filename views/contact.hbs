@@ -8,7 +8,11 @@
   <p class='isError'>You can not leave fields empty!</p>
 {{/if}}
 
-<form action='/contact/send-message' method='POST'>
+<form
+  action='/contact/send-message'
+  method='POST'
+  enctype='multipart/form-data'
+>
   <label>
     Your name:
     <input type='text' name='author' />
@@ -16,6 +20,10 @@
   <label>
     Your email:
     <input type='email' name='sender' />
+  </label>
+  <label>
+    Project design:
+    <input type='file' name='design' accept='.png, .jpg, .jpeg, .gif' />
   </label>
   <label>
     Title:
