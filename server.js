@@ -8,6 +8,8 @@ app.engine('hbs', hbs({ extname: 'hbs', defaultLayout: 'main' }));
 app.set('view engine', 'hbs');
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 app.use('/user', (req, res) => {
   res.render('forbidden');
@@ -39,6 +41,12 @@ app.get('/history', (req, res) => {
 
 app.get('/hello/:name', (req, res) => {
   res.render('hello', { name: req.params.name });
+});
+
+app.post('/contact/send-message', (req, res) => {
+  console.log(req.body);
+  res.json(req.body);
+  // res.send('POST METHOD');
 });
 
 app.use((req, res) => {
